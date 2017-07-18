@@ -334,7 +334,7 @@ configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
   ;;proxy
-  (load-file "E:/home/.emacs.d/w32-registry.el")
+  (load-file "~/.emacs.d/w32-registry.el")
   (let ((proxy (w32reg-get-ie-proxy-config))) 
     (setq url-proxy-services (when proxy (list (cons "http" (caar proxy)))))) 
 
