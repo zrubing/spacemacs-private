@@ -129,7 +129,8 @@ It should only modify the values of Spacemacs settings."
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
-                         sanityinc-solarized-dark
+                         ;;sanityinc-solarized-dark
+                         solarized-dark
                          spacemacs-dark
                          spacemacs-light
                          )
@@ -351,6 +352,12 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 ;;  (load-file "~/.emacs.d/w32-registry.el")
 ;;  (let ((proxy (w32reg-get-ie-proxy-config)))
 ;;    (setq url-proxy-services (when proxy (list (cons "http" (caar proxy))))))
+
+  ;; set设置为中文简体语言环境
+  (set-language-environment 'utf-8)
+  (setq default-process-coding-system '(utf-8 . chinese-gbk))
+
+
     )
 
 (defun dotspacemacs/user-config ()
@@ -372,12 +379,11 @@ before packages are loaded."
       (set-fontset-font (frame-parameter nil 'font)
                         charset
                         (font-spec :family "Microsoft Yahei" :size 20))))
-
-
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
 This is an auto-generated function, do not modify its content directly, use
@@ -393,7 +399,7 @@ This function is called at the very end of Spacemacs initialization."
     ("4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default)))
  '(package-selected-packages
    (quote
-    (company-lua lua-mode powerline smeargle orgit magit-gitflow window-purpose imenu-list helm-gitignore helm helm-core color-theme-sanityinc-solarized org-projectile org-present org-pomodoro alert log4e gntp org-download org-brain htmlize helm-company helm-c-yasnippet gnuplot fuzzy flycheck-pos-tip pos-tip flycheck evil-org company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org symon string-inflection spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el password-generator paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-purpose helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line))))
+    (solarized-theme company-lua lua-mode powerline smeargle orgit magit-gitflow window-purpose imenu-list helm-gitignore helm helm-core color-theme-sanityinc-solarized org-projectile org-present org-pomodoro alert log4e gntp org-download org-brain htmlize helm-company helm-c-yasnippet gnuplot fuzzy flycheck-pos-tip pos-tip flycheck evil-org company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org symon string-inflection spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el password-generator paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-purpose helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
