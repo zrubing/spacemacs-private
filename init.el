@@ -85,7 +85,7 @@ It should only modify the values of Spacemacs settings."
    ;; This variable has no effect if Emacs is launched with the parameter
    ;; `--insecure' which forces the value of this variable to nil.
    ;; (default t)
-   dotspacemacs-elpa-https t
+   dotspacemacs-elpa-https nil
    ;; Maximum allowed time in seconds to contact an ELPA repository.
    dotspacemacs-elpa-timeout 5
    ;; If non-nil then spacemacs will check for updates at startup
@@ -289,7 +289,7 @@ It should only modify the values of Spacemacs settings."
    ;; (default nil)
    dotspacemacs-smartparens-strict-mode nil
    ;; If non-nil pressing the closing parenthesis `)' key in insert mode passes
-   ;; over any automatically added closing parenthesis, bracket, quote, etc¡­
+   ;; over any automatically added closing parenthesis, bracket, quote, etcï¿½ï¿½
    ;; This can be temporary disabled by pressing `C-q' before `)'. (default nil)
    dotspacemacs-smart-closing-parenthesis nil
    ;; Select a scope to highlight delimiters. Possible values are `any',
@@ -348,6 +348,12 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
+
+  (setq configuration-layer--elpa-archives
+      '(("melpa-cn" . "http://elpa.zilongshanren.com/melpa/")
+        ("org-cn"   . "http://elpa.zilongshanren.com/org/")
+        ("gnu-cn"   . "http://elpa.zilongshanren.com/gnu/")))
+
   (set-language-environment 'chinese-gbk)
   (prefer-coding-system 'utf-8)
   ;;chinese search pt
