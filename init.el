@@ -38,18 +38,18 @@ This function should only modify configuration layer settings."
      helm
      ;;auto-completion
      (auto-completion :disable-for org git)
-     ;; better-defaults
+     better-defaults
      emacs-lisp
      ;; git
      (git :variables
           git-magit-statusfullscreen t
           git-variable-example nil)
-     ;; markdown
+     markdown
      org
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
-     ;; spell-checking
+     spell-checking
      syntax-checking
      ;; version-control
      )
