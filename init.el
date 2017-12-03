@@ -46,6 +46,8 @@ This function should only modify configuration layer settings."
           git-variable-example nil)
      markdown
      org
+     (chinese :variables
+              chinese-enable-youdao-dict t)
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
@@ -57,7 +59,7 @@ This function should only modify configuration layer settings."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(youdao-dictionary)
+   dotspacemacs-additional-packages '()
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -130,6 +132,7 @@ It should only modify the values of Spacemacs settings."
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
                          ;;sanityinc-solarized-dark
+                         monokai
                          solarized-dark
                          spacemacs-dark
                          spacemacs-light
@@ -348,6 +351,7 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
+  (spacemacs/set-leader-keys "oy" 'youdao-dictionary-search-at-point+)
 
   (setq configuration-layer--elpa-archives
       '(("melpa-cn" . "http://elpa.zilongshanren.com/melpa/")
@@ -369,7 +373,11 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  ;;modeline
+  (setq ns-use-srgb-colorspace nil)
+
   ;; Setting Chinese Font
+  (setq ns-use-srgb-colorspace nil)
   (when (and (spacemacs/system-is-mswindows) window-system)
     (setq ispell-program-name "aspell")
     (setq w32-pass-alt-to-system nil)
