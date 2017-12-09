@@ -29,7 +29,11 @@ This function should only modify configuration layer settings."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(lua
+   '(yaml
+     imenu-list
+     javascript
+     html
+     lua
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -40,11 +44,9 @@ This function should only modify configuration layer settings."
      (auto-completion :disable-for org git)
      better-defaults
      emacs-lisp
-     ;; git
-     (git :variables
-          git-magit-statusfullscreen t
-          git-variable-example nil)
-     markdown
+     git
+     (markdown :variables
+               markdown-live-preview-engine 'vmd)
      org
      (chinese :variables
               chinese-enable-youdao-dict t)
@@ -53,7 +55,7 @@ This function should only modify configuration layer settings."
      ;;        shell-default-position 'bottom)
      ;; spell-checking
      syntax-checking
-     ;; version-control
+     version-control
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -63,7 +65,7 @@ This function should only modify configuration layer settings."
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(imenu-list spaceline)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and deletes any unused
@@ -305,7 +307,7 @@ It should only modify the values of Spacemacs settings."
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `rg', `ag', `pt', `ack' and `grep'.
    ;; (default '("rg" "ag" "pt" "ack" "grep"))
-   dotspacemacs-search-tools '("rg" "ag" "pt" "ack" "grep")
+   dotspacemacs-search-tools '("pt" "rg" "ag" "ack" "grep")
    ;; The default package repository used if no explicit repository has been
    ;; specified with an installed package.
    ;; Not used for now. (default nil)
@@ -354,9 +356,14 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (spacemacs/set-leader-keys "oy" 'youdao-dictionary-search-at-point+)
 
   (setq configuration-layer--elpa-archives
-      '(("melpa-cn" . "http://elpa.zilongshanren.com/melpa/")
-        ("org-cn"   . "http://elpa.zilongshanren.com/org/")
-        ("gnu-cn"   . "http://elpa.zilongshanren.com/gnu/")))
+        '(("melpa-cn" . "https://elpa.emacs-china.org/melpa/")
+          ("org-cn"   . "https://elpa.emacs-china.org/org/")
+          ("gnu-cn"   . "https://elpa.emacs-china.org/gnu/")))
+
+  (defun my-flymd-browser-function (url)
+    (let ((browse-url-browser-function 'browse-url-firefox))
+      (browse-url url)))
+  (setq flymd-browser-open-function 'my-flymd-browser-function)
 
   (set-language-environment 'chinese-gbk)
   (prefer-coding-system 'utf-8)
@@ -387,6 +394,15 @@ before packages are loaded."
                         charset
                         (font-spec :family "Microsoft Yahei" :size 20))))
 
+  (put 'dired-find-alternate-file 'disabled nil)
+
+  ;; 主动加载 Dired Mode
+  ;; (require 'dired)
+  ;; (defined-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
+
+  ;; 延迟加载
+  (with-eval-after-load 'dired
+    (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
