@@ -29,7 +29,9 @@ This function should only modify configuration layer settings."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(yaml
+   '(python
+     yaml
+     c-c++
      imenu-list
      javascript
      html
@@ -56,6 +58,7 @@ This function should only modify configuration layer settings."
      ;; spell-checking
      syntax-checking
      version-control
+     treemacs
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -134,7 +137,7 @@ It should only modify the values of Spacemacs settings."
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
                          ;;sanityinc-solarized-dark
-                         monokai
+                         ;;monokai
                          solarized-dark
                          spacemacs-dark
                          spacemacs-light
@@ -354,8 +357,7 @@ configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (spacemacs/set-leader-keys "oy" 'youdao-dictionary-search-at-point+)
-
-  (setq configuration-layer--elpa-archives
+  (setq configuration-layer-elpa-archives
         '(("melpa-cn" . "https://elpa.emacs-china.org/melpa/")
           ("org-cn"   . "https://elpa.emacs-china.org/org/")
           ("gnu-cn"   . "https://elpa.emacs-china.org/gnu/")))
@@ -382,6 +384,8 @@ Put your configuration code here, except for variables that should be set
 before packages are loaded."
   ;;modeline
   (setq ns-use-srgb-colorspace nil)
+  (setq js2-strict-missing-semi-warning nil)
+  (setq js2-missing-semi-one-line-override nil)
 
   ;; Setting Chinese Font
   (setq ns-use-srgb-colorspace nil)
@@ -403,6 +407,14 @@ before packages are loaded."
   ;; 延迟加载
   (with-eval-after-load 'dired
     (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
+  ;; 在括号内也高亮括号
+  (define-advice show-paren-function (:around (fn) fix-show-paren-function)
+    "Highlight enclosing parens."
+    (cond ((looking-at-p "\\s(") (funcall fn))
+          (t (save-excursion
+               (ignore-errors (backward-up-list))
+               (funcall fn)))))
+  
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
