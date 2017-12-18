@@ -414,7 +414,14 @@ before packages are loaded."
           (t (save-excursion
                (ignore-errors (backward-up-list))
                (funcall fn)))))
-  
+
+  (setq path-to-ctags "ctags-exuberant") ;; <- your ctags path here
+  (defun create-tags (dir-name)
+    "Create tags file."
+    (interactive "DDirectory: ")
+    (shell-command
+     (format "%s -f TAGS -e -R %s" path-to-ctags (directory-file-name dir-name)))
+    )
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
