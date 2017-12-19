@@ -30,6 +30,7 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(python
+     gtags
      yaml
      c-c++
      imenu-list
@@ -422,6 +423,10 @@ before packages are loaded."
     (shell-command
      (format "%s -f TAGS -e -R %s" path-to-ctags (directory-file-name dir-name)))
     )
+
+  ;;indentation
+  (setq-default js2-basic-offset 2
+                js-indent-level 2)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
