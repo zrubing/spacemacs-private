@@ -58,7 +58,9 @@ This function should only modify configuration layer settings."
      ;;        shell-default-position 'bottom)
      ;; spell-checking
      syntax-checking
-     version-control
+     (version-control :variables
+                      version-control-diff-tool 'diff-hl
+                      version-control-diff-side 'left)
      (treemacs :variables
                treemacs-use-follow-mode t
                treemacs-use-filewatch-mode t
@@ -68,7 +70,7 @@ This function should only modify configuration layer settings."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(web-beautify-js)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -366,15 +368,11 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
           ("org-cn"   . "https://elpa.emacs-china.org/org/")
           ("gnu-cn"   . "https://elpa.emacs-china.org/gnu/")))
 
-  (defun my-flymd-browser-function (url)
-    (let ((browse-url-browser-function 'browse-url-firefox))
-      (browse-url url)))
-  (setq flymd-browser-open-function 'my-flymd-browser-function)
 
-  (set-language-environment 'chinese-gbk)
-  (prefer-coding-system 'utf-8)
+  ;;(set-language-environment 'chinese-gbk)
+  ;;(prefer-coding-system 'utf-8)
   ;;chinese search pt
-  (setq default-process-coding-system '(utf-8 . chinese-gbk))
+  ;;(setq default-process-coding-system '(utf-8 . chinese-gbk))
 
   (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
   (load custom-file 'no-error 'no-message)
